@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "565673204063",
+    "firebase_url": "https://erajd-2018.firebaseio.com",
+    "project_id": "erajd-2018",
+    "storage_bucket": "erajd-2018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565673204063:android:55c0e605c3ce99b7",
+        "android_client_info": {
+          "package_name": "com.example.erajd_2018"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565673204063-kidnm7278vtpgib6hmdj6nhioed3glgr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.erajd_2018",
+            "certificate_hash": "8cd3d942483b50e2fb3384fab037a4195d019aa6"
+          }
+        },
+        {
+          "client_id": "565673204063-p85cag024utp2d3ejs1v1q7a4hictf17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJXolJnLNi5HnBIb6fKy0xrSIUjUhTnWI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565673204063-p85cag024utp2d3ejs1v1q7a4hictf17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
