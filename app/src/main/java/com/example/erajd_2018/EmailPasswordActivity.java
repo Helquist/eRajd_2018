@@ -1,11 +1,15 @@
 package com.example.erajd_2018;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +25,8 @@ public class EmailPasswordActivity extends BaseActivity implements
 
     private static final String TAG = "EmailPassword";
     public static final String EXTRA_MESSAGE = "com.example.erajd_2018.MESSAGE";
+    public static String FACEBOOK_URL = "https://www.facebook.com/WRSSWIEiT/";
+    public static String FACEBOOK_PAGE_ID = "WRSSWIEiT";
 
     private TextView mStatusTextView;
     private TextView mDetailTextView;
@@ -51,6 +57,8 @@ public class EmailPasswordActivity extends BaseActivity implements
         // [START initialize_auth]
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     // [START on_start_check_user]
@@ -224,6 +232,34 @@ public class EmailPasswordActivity extends BaseActivity implements
             findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
             findViewById(R.id.signed_in_buttons).setVisibility(View.GONE);
         }
+    }
+
+
+    public String getFacebookPageURL(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+
+            boolean activated =  packageManager.getApplicationInfo("com.facebook.katana", 0).enabled;
+            if(activated){
+                if ((versionCode >= 3002850)) {
+                    return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+                } else {
+                    return "fb://page/" + FACEBOOK_PAGE_ID;
+                }
+            }else{
+                return FACEBOOK_URL;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL;
+        }
+    }
+
+    public void goToFacebookPage(View view) {
+        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+        String facebookUrl = getFacebookPageURL(this);
+        facebookIntent.setData(Uri.parse(facebookUrl));
+        startActivity(facebookIntent);
     }
 
     @Override
