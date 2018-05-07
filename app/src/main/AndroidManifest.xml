@@ -16,7 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".TestActivity" />
+        <activity
+            android:name=".LoggedActivity"
+            android:label="@string/title_activity_logged"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

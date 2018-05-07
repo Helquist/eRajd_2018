@@ -34,7 +34,7 @@ public class TestActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private StorageReference mStorageRef;
-    private  FirebaseDatabase database;
+    private FirebaseDatabase database;
     public static final int PICK_IMAGE = 1;
 
     @Override
