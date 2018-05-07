@@ -65,4 +65,10 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+    <string name="plan">Plan eRajdu</string>
+    <string name="challange">Challenge</string>
+    <string name="voleyball">Siatkówka</string>
+    <string name="football">Piłka nożna</string>
+    <string name="organizer">Organizator</string>
+    <string name="location">Ośrodek</string>
 </resources>

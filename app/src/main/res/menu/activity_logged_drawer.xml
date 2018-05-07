@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_plan"
+            android:icon="@drawable/ic_date_range_black_24dp"
+            android:title="@string/plan" />
+        <item
+            android:id="@+id/nav_challenge"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="@string/challange" />
+        <item
+            android:id="@+id/nav_volleyball"
+            android:icon="@drawable/ic_volleyball"
+            android:title="@string/voleyball" />
+        <item
+            android:id="@+id/nav_football"
+            android:icon="@drawable/ic_soccer_ball"
+            android:title="@string/football" />
+    </group>
+
+    <item android:title="Kontakt">
+        <menu>
+            <item
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/ic_phone_black_24dp"
+                android:title="@string/organizer" />
+            <item
+                android:id="@+id/nav_location"
+                android:icon="@drawable/ic_place_black_24dp"
+                android:title="@string/location" />
+        </menu>
+    </item>
+
+</menu>
