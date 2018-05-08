@@ -16,7 +16,7 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class OrganizerActivity extends AppCompatActivity
+public class ContactActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
@@ -24,22 +24,11 @@ public class OrganizerActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_organizer);
+        setContentView(R.layout.activity_contact);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         mAuth = FirebaseAuth.getInstance();
-
-
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,7 +53,7 @@ public class OrganizerActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.logged, menu);
+        getMenuInflater().inflate(R.menu.global, menu);
         return true;
     }
 
@@ -106,7 +95,7 @@ public class OrganizerActivity extends AppCompatActivity
             Intent intent = new Intent(this, FootballActivity.class);;
             startActivity(intent);
         } else if (id == R.id.nav_contact) {
-            Intent intent = new Intent(this, OrganizerActivity.class);;
+            Intent intent = new Intent(this, ContactActivity.class);;
             startActivity(intent);
         } else if (id == R.id.nav_location) {
             Intent intent = new Intent(this, LocationActivity.class);;

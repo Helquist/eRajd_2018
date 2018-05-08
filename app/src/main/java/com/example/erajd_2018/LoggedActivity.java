@@ -57,14 +57,15 @@ public class LoggedActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent intent = new Intent(this, LoggedActivity.class);;
+            startActivity(intent);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.logged, menu);
+        getMenuInflater().inflate(R.menu.global, menu);
         return true;
     }
 
@@ -106,7 +107,7 @@ public class LoggedActivity extends AppCompatActivity
             Intent intent = new Intent(this, FootballActivity.class);;
             startActivity(intent);
         } else if (id == R.id.nav_contact) {
-            Intent intent = new Intent(this, OrganizerActivity.class);;
+            Intent intent = new Intent(this, ContactActivity.class);;
             startActivity(intent);
         } else if (id == R.id.nav_location) {
             Intent intent = new Intent(this, LocationActivity.class);;

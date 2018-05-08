@@ -22,12 +22,12 @@
             android:label="@string/title_activity_logged"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".PlanActivity"
-            android:label="@string/title_activity_plan"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ChallengeActivity"
             android:label="@string/title_activity_challenge"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PlanActivity"
+            android:label="@string/title_activity_plan"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VolleyballActivity"
@@ -38,8 +38,8 @@
             android:label="@string/title_activity_football"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".OrganizerActivity"
-            android:label="@string/title_activity_organizer"
+            android:name=".ContactActivity"
+            android:label="@string/title_activity_contact"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LocationActivity"

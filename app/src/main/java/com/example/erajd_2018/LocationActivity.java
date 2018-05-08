@@ -27,19 +27,8 @@ public class LocationActivity extends AppCompatActivity
         setContentView(R.layout.activity_location);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         mAuth = FirebaseAuth.getInstance();
-
-
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,7 +53,7 @@ public class LocationActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.logged, menu);
+        getMenuInflater().inflate(R.menu.global, menu);
         return true;
     }
 
@@ -106,7 +95,7 @@ public class LocationActivity extends AppCompatActivity
             Intent intent = new Intent(this, FootballActivity.class);;
             startActivity(intent);
         } else if (id == R.id.nav_contact) {
-            Intent intent = new Intent(this, OrganizerActivity.class);;
+            Intent intent = new Intent(this, ContactActivity.class);;
             startActivity(intent);
         } else if (id == R.id.nav_location) {
             Intent intent = new Intent(this, LocationActivity.class);;
