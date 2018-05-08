@@ -21,6 +21,13 @@ public class LoggedActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
+    private TextView mMailTextView;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mMailTextView.setText(mAuth.getCurrentUser().getEmail());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +59,8 @@ public class LoggedActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
-        TextView mNameTextView = (TextView) header.findViewById(R.id.mailTextView);
-        mNameTextView.setText(mAuth.getCurrentUser().getEmail());
+        mMailTextView = (TextView) header.findViewById(R.id.mailTextView);
+        mMailTextView.setText(mAuth.getCurrentUser().getEmail());
     }
 
     @Override

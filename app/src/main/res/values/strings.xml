@@ -77,5 +77,9 @@
     <string name="title_activity_football">Piłka nożna</string>
     <string name="title_activity_organizer">Organizator</string>
     <string name="title_activity_location">Ośrodek</string>
-    <string name="title_activity_contact">ContactActivity</string>
+    <string name="title_activity_contact">Organizator</string>
+    <string name="day1">Dzień 1</string>
+    <string name="day2">Dzień 2</string>
+    <string name="day3">Dzień 3</string>
+
 </resources>
