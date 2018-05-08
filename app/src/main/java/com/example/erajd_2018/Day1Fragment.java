@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 
 /**
@@ -22,8 +24,19 @@ public class Day1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_day, container, false);
+        String[] tmp = {"1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"};
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_day1, container, false);
+        ListView listView = rootView.findViewById(R.id.listViewDay1);
+
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
+                getActivity(),
+                android.R.layout.simple_list_item_1,
+                tmp
+        );
+
+        listView.setAdapter(listViewAdapter);
+
         return rootView;
     }
 

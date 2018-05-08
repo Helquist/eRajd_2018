@@ -54,7 +54,8 @@ public class PlanActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent intent = new Intent(this, LoggedActivity.class);;
+            startActivity(intent);
         }
     }
 
