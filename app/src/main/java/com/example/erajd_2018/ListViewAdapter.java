@@ -13,9 +13,8 @@ public class ListViewAdapter extends BaseAdapter{
 
     public ArrayList<HashMap<String, String>> list;
     Activity activity;
-    public static final String FIRST_COLUMN="First";
-    public static final String SECOND_COLUMN="Second";
-    public static final String THIRD_COLUMN="Third";
+    public static final String TIME="Time";
+    public static final String NAME="Name";
 
 
     public ListViewAdapter(Activity activity,ArrayList<HashMap<String, String>> list){
@@ -70,8 +69,8 @@ public class ListViewAdapter extends BaseAdapter{
         }
 
         HashMap<String, String> map=list.get(position);
-        holder.txtFirst.setText(map.get(FIRST_COLUMN));
-        holder.txtSecond.setText(map.get(SECOND_COLUMN));
+        holder.txtFirst.setText(map.get(TIME));
+        holder.txtSecond.setText(map.get(NAME));
 
 
         return convertView;
