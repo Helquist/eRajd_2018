@@ -23,11 +23,6 @@ public class LoggedActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private TextView mMailTextView;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mMailTextView.setText(mAuth.getCurrentUser().getEmail());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
