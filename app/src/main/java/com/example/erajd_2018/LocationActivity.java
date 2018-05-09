@@ -1,6 +1,7 @@
 package com.example.erajd_2018;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -24,6 +27,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LocationActivity extends AppCompatActivity
@@ -33,7 +37,7 @@ public class LocationActivity extends AppCompatActivity
     private TextView mMailTextView;
 
 
-    private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
+    private FusedLocationProviderClient mFusedLocationClient;
 
 
     @Override
@@ -61,7 +65,24 @@ public class LocationActivity extends AppCompatActivity
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        /*
+
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                        }
+                    }
+                });
+        */
     }
+
 
     @Override
     public void onBackPressed() {
@@ -134,7 +155,7 @@ public class LocationActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap map) {
         map.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
+                .position(new LatLng(49.3687773, 20.884274900000037))
                 .title("Marker"));
     }
 
