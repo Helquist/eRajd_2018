@@ -81,5 +81,5 @@
     <string name="day1">Dzień 1</string>
     <string name="day2">Dzień 2</string>
     <string name="day3">Dzień 3</string>
-
+    <string name="google_android_map_api_key">AIzaSyAJXolJnLNi5HnBIb6fKy0xrSIUjUhTnWI</string>
 </resources>

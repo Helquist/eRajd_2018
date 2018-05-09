@@ -52,7 +52,9 @@ public class Day1Fragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         myRefDay1 = database.getReference("plan_d1");
 
+
         final ListView listView=(ListView)rootView.findViewById(R.id.listViewDay1);
+
 
         // Read from the database
         myRefDay1.addValueEventListener(new ValueEventListener() {
@@ -73,6 +75,8 @@ public class Day1Fragment extends Fragment {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
+
 
 
 
