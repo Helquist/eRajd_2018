@@ -53,7 +53,8 @@ public class ChallengeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(this, LoggedActivity.class);;
+            Intent intent = new Intent(this, LoggedActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         }
     }
@@ -91,22 +92,28 @@ public class ChallengeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_plan) {
-            Intent intent = new Intent(this, PlanActivity.class);;
+            Intent intent = new Intent(this, PlanActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_challenge) {
-            Intent intent = new Intent(this, ChallengeActivity.class);;
+            Intent intent = new Intent(this, ChallengeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_volleyball) {
-            Intent intent = new Intent(this, VolleyballActivity.class);;
+            Intent intent = new Intent(this, VolleyballActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_football) {
-            Intent intent = new Intent(this, FootballActivity.class);;
+            Intent intent = new Intent(this, FootballActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_contact) {
-            Intent intent = new Intent(this, ContactActivity.class);;
+            Intent intent = new Intent(this, ContactActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_location) {
-            Intent intent = new Intent(this, LocationActivity.class);;
+            Intent intent = new Intent(this, LocationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         }
 
