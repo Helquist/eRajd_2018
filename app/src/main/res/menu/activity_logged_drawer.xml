@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -20,19 +21,20 @@
             android:id="@+id/nav_football"
             android:icon="@drawable/ic_soccer_ball"
             android:title="@string/football" />
+
+        <item android:title="Kontakt">
+            <menu>
+                <item
+                    android:id="@+id/nav_contact"
+                    android:icon="@drawable/ic_phone_black_24dp"
+                    android:title="@string/organizer" />
+                <item
+                    android:id="@+id/nav_location"
+                    android:icon="@drawable/ic_place_black_24dp"
+                    android:title="@string/location" />
+            </menu>
+        </item>
     </group>
 
-    <item android:title="Kontakt">
-        <menu>
-            <item
-                android:id="@+id/nav_contact"
-                android:icon="@drawable/ic_phone_black_24dp"
-                android:title="@string/organizer" />
-            <item
-                android:id="@+id/nav_location"
-                android:icon="@drawable/ic_place_black_24dp"
-                android:title="@string/location" />
-        </menu>
-    </item>
 
 </menu>

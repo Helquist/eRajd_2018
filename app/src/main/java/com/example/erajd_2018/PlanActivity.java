@@ -24,7 +24,7 @@ public class PlanActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
     private TextView mMailTextView;
-
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class PlanActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -53,6 +53,16 @@ public class PlanActivity extends AppCompatActivity
         View header = navigationView.getHeaderView(0);
         mMailTextView = (TextView) header.findViewById(R.id.mailTextView);
         mMailTextView.setText(mAuth.getCurrentUser().getEmail());
+    }
+
+    @Override
+    public void onResume() {
+        int size = navigationView.getMenu().size();
+        for (int i = 0; i < size; i++) {
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
+        navigationView.getMenu().getItem(0).setChecked(true);
+        super.onResume();
     }
 
     @Override

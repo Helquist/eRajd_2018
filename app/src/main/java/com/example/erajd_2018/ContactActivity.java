@@ -22,6 +22,7 @@ public class ContactActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
     private TextView mMailTextView;
+    private NavigationView navigationView;
 
 
     @Override
@@ -39,12 +40,22 @@ public class ContactActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
         mMailTextView = (TextView) header.findViewById(R.id.mailTextView);
         mMailTextView.setText(mAuth.getCurrentUser().getEmail());
+    }
+
+    @Override
+    public void onResume() {
+        int size = navigationView.getMenu().size();
+        for (int i = 0; i < size; i++) {
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
+        navigationView.getMenu().getItem(4).getSubMenu().getItem(0).setChecked(true);
+        super.onResume();
     }
 
     @Override
