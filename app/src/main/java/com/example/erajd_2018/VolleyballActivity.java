@@ -9,6 +9,8 @@ import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -31,28 +33,34 @@ public class VolleyballActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private TextView mMailTextView;
     private FirebaseDatabase database;
-    private DatabaseReference zapisy;
+    private DatabaseReference application;
+    private FragmentTransaction mFragmentTransaction;
+    private FragmentManager mFragmentManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
-        zapisy = database.getReference("zapisy_volleyball");
+        application = database.getReference("zapisy_siata");
 
 
-        zapisy.addValueEventListener(new ValueEventListener() {
+        application.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                boolean z = dataSnapshot.getValue(Boolean.class);
-                if(z){
-                    TextView tv = findViewById(R.id.textView5);
-                    tv.setText("true");
+                boolean a = dataSnapshot.getValue(Boolean.class);
+                if(a){
+                    mFragmentManager = getSupportFragmentManager();
+                    mFragmentTransaction = mFragmentManager.beginTransaction();
+                    mFragmentTransaction.replace(R.id.content_frame, new VolleyballApplicationFragment());
+                    mFragmentTransaction.commit();
                 } else {
-                    TextView tv = findViewById(R.id.textView5);
-                    tv.setText("false");
+                    mFragmentManager = getSupportFragmentManager();
+                    mFragmentTransaction = mFragmentManager.beginTransaction();
+                    mFragmentTransaction.replace(R.id.content_frame, new VolleyballResultsFragment());
+                    mFragmentTransaction.commit();
                 }
 
             }
@@ -63,9 +71,6 @@ public class VolleyballActivity extends AppCompatActivity
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-
-
 
         setContentView(R.layout.activity_volleyball);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
