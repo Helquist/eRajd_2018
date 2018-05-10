@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,17 +17,56 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class VolleyballActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
     private TextView mMailTextView;
+    private FirebaseDatabase database;
+    private DatabaseReference zapisy;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        database = FirebaseDatabase.getInstance();
+        zapisy = database.getReference("zapisy_volleyball");
+
+
+        zapisy.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                boolean z = dataSnapshot.getValue(Boolean.class);
+                if(z){
+                    TextView tv = findViewById(R.id.textView5);
+                    tv.setText("true");
+                } else {
+                    TextView tv = findViewById(R.id.textView5);
+                    tv.setText("false");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+
+
+
         setContentView(R.layout.activity_volleyball);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,7 +93,8 @@ public class VolleyballActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(this, LoggedActivity.class);;
+            Intent intent = new Intent(this, LoggedActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         }
     }
@@ -91,22 +132,28 @@ public class VolleyballActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_plan) {
-            Intent intent = new Intent(this, PlanActivity.class);;
+            Intent intent = new Intent(this, PlanActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_challenge) {
-            Intent intent = new Intent(this, ChallengeActivity.class);;
+            Intent intent = new Intent(this, ChallengeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_volleyball) {
-            Intent intent = new Intent(this, VolleyballActivity.class);;
+            Intent intent = new Intent(this, VolleyballActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_football) {
-            Intent intent = new Intent(this, FootballActivity.class);;
+            Intent intent = new Intent(this, FootballActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_contact) {
-            Intent intent = new Intent(this, ContactActivity.class);;
+            Intent intent = new Intent(this, ContactActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_location) {
-            Intent intent = new Intent(this, LocationActivity.class);;
+            Intent intent = new Intent(this, LocationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         }
 
