@@ -82,7 +82,17 @@
     <string name="day2">Dzień 2</string>
     <string name="day3">Dzień 3</string>
     <string name="google_android_map_api_key">AIzaSyAJXolJnLNi5HnBIb6fKy0xrSIUjUhTnWI</string>
+    <string name="team_name">Nazwa drużyny</string>
+    <string name="name">Imię</string>
+    <string name="surname">Nazwisko</string>
+    <string name="phone">Numer telefonu</string>
+    <string name="person1">Pierwszy członek</string>
+    <string name="person2">Drugi członek</string>
+    <string name="person3">Trzeci członek</string>
+    <string name="person4">Czwarty członek</string>
+    <string name="person5">Piąty członek</string>
+    <string name="person6">Szósty członek</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

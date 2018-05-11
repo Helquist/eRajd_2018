@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +45,7 @@ public class VolleyballActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
         application = database.getReference("zapisy_siata");
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
 
         application.addValueEventListener(new ValueEventListener() {

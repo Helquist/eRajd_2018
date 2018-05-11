@@ -68,7 +68,8 @@ public class EmailPasswordActivity extends BaseActivity implements
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent intent = new Intent(EmailPasswordActivity.this, LoggedActivity.class);;
+            Intent intent = new Intent(EmailPasswordActivity.this, LoggedActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             String message = "TEST";
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
@@ -132,6 +133,7 @@ public class EmailPasswordActivity extends BaseActivity implements
                             Intent intent = new Intent(EmailPasswordActivity.this, LoggedActivity.class);;
                             String message = "TEST";
                             intent.putExtra(EXTRA_MESSAGE, message);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                             startActivity(intent);
                             updateUI(user);
                         } else {
@@ -259,6 +261,7 @@ public class EmailPasswordActivity extends BaseActivity implements
         Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
         String facebookUrl = getFacebookPageURL(this);
         facebookIntent.setData(Uri.parse(facebookUrl));
+        facebookIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(facebookIntent);
     }
 
