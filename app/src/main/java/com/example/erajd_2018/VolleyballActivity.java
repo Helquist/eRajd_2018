@@ -55,12 +55,12 @@ public class VolleyballActivity extends AppCompatActivity
                 if(a){
                     mFragmentManager = getSupportFragmentManager();
                     mFragmentTransaction = mFragmentManager.beginTransaction();
-                    mFragmentTransaction.replace(R.id.content_frame, new VolleyballApplicationFragment());
+                    mFragmentTransaction.replace(R.id.content_frame_volleyball, new VolleyballApplicationFragment());
                     mFragmentTransaction.commit();
                 } else {
                     mFragmentManager = getSupportFragmentManager();
                     mFragmentTransaction = mFragmentManager.beginTransaction();
-                    mFragmentTransaction.replace(R.id.content_frame, new VolleyballResultsFragment());
+                    mFragmentTransaction.replace(R.id.content_frame_volleyball, new VolleyballResultsFragment());
                     mFragmentTransaction.commit();
                 }
 
