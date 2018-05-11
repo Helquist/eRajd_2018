@@ -406,6 +406,20 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editText_surname6" />
                 </android.support.constraint.ConstraintLayout>
+
+                <View
+                    android:id="@+id/separator7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <Button
+                    android:id="@+id/submit_volleyball_team"
+                    android:text="@string/submmit_team"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ThemeOverlay.MyDarkButton"/>
             </LinearLayout>
         </ScrollView>
 
