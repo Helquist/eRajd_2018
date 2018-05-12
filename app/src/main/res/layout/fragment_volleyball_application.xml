@@ -415,11 +415,11 @@
 
                 <Button
                     android:id="@+id/submit_volleyball_team"
-                    android:text="@string/submmit_team"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/ThemeOverlay.MyDarkButton"/>
+                    android:text="@string/submmit_team"
+                    android:theme="@style/ThemeOverlay.MyDarkButton" />
             </LinearLayout>
         </ScrollView>
 
