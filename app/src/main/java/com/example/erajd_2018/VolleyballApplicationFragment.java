@@ -125,9 +125,9 @@ public class VolleyballApplicationFragment extends Fragment implements View.OnCl
         switch (v.getId()) {
             case R.id.submit_volleyball_team:
                 if(validateForm()){
-                    teamRef = database.getReference(String.valueOf(teamName.getText()));
+                    teamRef = database.getReference("teamsVolleyball");
+                    teamRef = teamRef.child(String.valueOf(teamName.getText()));
                     teamRef.addListenerForSingleValueEvent(teamNameListener);
-                    teamRef.setValue("test");
                     //Toast.makeText(getActivity().getApplicationContext(), "valid", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "Uzupełnij wszystkie pola", Toast.LENGTH_SHORT).show();
@@ -140,11 +140,33 @@ public class VolleyballApplicationFragment extends Fragment implements View.OnCl
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             if(dataSnapshot.exists()){
-                Toast.makeText(getActivity().getApplicationContext(), "zajęta nazwa", Toast.LENGTH_SHORT).show();
+                teamName.setError("Nazwa już w użyciu");
+                Toast.makeText(getActivity().getApplicationContext(), "Zajęta nazwa", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity().getApplicationContext(), "wolna nawa", Toast.LENGTH_SHORT).show();
+                teamRef.child("person1").child("name").setValue(name1.getText().toString());
+                teamRef.child("person1").child("surname").setValue(surname1.getText().toString());
+                teamRef.child("person1").child("phone").setValue(phone1.getText().toString());
+                teamRef.child("person2").child("name").setValue(name2.getText().toString());
+                teamRef.child("person2").child("surname").setValue(surname2.getText().toString());
+                teamRef.child("person2").child("phone").setValue(phone2.getText().toString());
+                teamRef.child("person3").child("name").setValue(name3.getText().toString());
+                teamRef.child("person3").child("surname").setValue(surname3.getText().toString());
+                teamRef.child("person3").child("phone").setValue(phone3.getText().toString());
+                teamRef.child("person4").child("name").setValue(name4.getText().toString());
+                teamRef.child("person4").child("surname").setValue(surname4.getText().toString());
+                teamRef.child("person4").child("phone").setValue(phone4.getText().toString());
+                teamRef.child("person5").child("name").setValue(name5.getText().toString());
+                teamRef.child("person5").child("surname").setValue(surname5.getText().toString());
+                teamRef.child("person5").child("phone").setValue(phone5.getText().toString());
+                teamRef.child("person6").child("name").setValue(name6.getText().toString());
+                teamRef.child("person6").child("surname").setValue(surname6.getText().toString());
+                teamRef.child("person6").child("phone").setValue(phone6.getText().toString());
+
+
+                Toast.makeText(getActivity().getApplicationContext(), "Zgłoszono drużynę", Toast.LENGTH_SHORT).show();
             }
         }
+
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
