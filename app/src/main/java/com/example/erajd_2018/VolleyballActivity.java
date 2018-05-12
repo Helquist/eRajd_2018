@@ -45,7 +45,7 @@ public class VolleyballActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
         application = database.getReference("zapisy_siata");
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
 
         application.addValueEventListener(new ValueEventListener() {

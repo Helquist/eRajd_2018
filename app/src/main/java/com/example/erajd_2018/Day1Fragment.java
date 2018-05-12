@@ -76,10 +76,6 @@ public class Day1Fragment extends Fragment {
             }
         });
 
-
-
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override

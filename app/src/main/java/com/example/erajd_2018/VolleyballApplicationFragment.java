@@ -8,10 +8,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -19,26 +23,15 @@ import java.util.ArrayList;
 public class VolleyballApplicationFragment extends Fragment implements View.OnClickListener{
 
     private EditText teamName;
-    private EditText name1;
-    private EditText surname1;
-    private EditText phone1;
-    private EditText name2;
-    private EditText surname2;
-    private EditText phone2;
-    private EditText name3;
-    private EditText surname3;
-    private EditText phone3;
-    private EditText name4;
-    private EditText surname4;
-    private EditText phone4;
-    private EditText name5;
-    private EditText surname5;
-    private EditText phone5;
-    private EditText name6;
-    private EditText surname6;
-    private EditText phone6;
+    private EditText name1; private EditText surname1; private EditText phone1;
+    private EditText name2; private EditText surname2; private EditText phone2;
+    private EditText name3; private EditText surname3; private EditText phone3;
+    private EditText name4; private EditText surname4; private EditText phone4;
+    private EditText name5; private EditText surname5; private EditText phone5;
+    private EditText name6; private EditText surname6; private EditText phone6;
     private Button sendButton;
-    private ArrayList<EditText> textFields = new ArrayList<EditText>();
+    private FirebaseDatabase database;
+    private DatabaseReference teamRef;
 
     public VolleyballApplicationFragment() {
         // Required empty public constructor
@@ -49,22 +42,21 @@ public class VolleyballApplicationFragment extends Fragment implements View.OnCl
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
-
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_volleyball_application, container, false);
+        database = FirebaseDatabase.getInstance();
 
         sendButton = (Button) rootView.findViewById(R.id.submit_volleyball_team);
         sendButton.setOnClickListener(this);
 
         teamName = rootView.findViewById(R.id.nazwa_text_field);
-
         name1 = rootView.findViewById(R.id.editText_name1);
         surname1 = rootView.findViewById(R.id.editText_surname1);
         phone1 = rootView.findViewById(R.id.editText_phone1);
@@ -89,7 +81,6 @@ public class VolleyballApplicationFragment extends Fragment implements View.OnCl
 
     public boolean validateForm(){
         boolean valid = true;
-
         if(!validateField(teamName)) valid=false;
         if(!validateField(name1)) valid=false;
         if(!validateField(surname1)) valid=false;
@@ -109,7 +100,6 @@ public class VolleyballApplicationFragment extends Fragment implements View.OnCl
         if(!validateField(name6)) valid=false;
         if(!validateField(surname6)) valid=false;
         if(!validateField(phone6)) valid=false;
-
         return valid;
     }
 
@@ -122,9 +112,7 @@ public class VolleyballApplicationFragment extends Fragment implements View.OnCl
         } else {
             field.setError(null);
         }
-
         return valid;
-
     }
 
     @Override
@@ -133,9 +121,11 @@ public class VolleyballApplicationFragment extends Fragment implements View.OnCl
         switch (v.getId()) {
             case R.id.submit_volleyball_team:
                 if(validateForm()){
+                    teamRef = database.getReference(String.valueOf(teamName.getText()));
+                    teamRef.setValue("aaa");
                     Toast.makeText(getActivity().getApplicationContext(), "valid", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "invalid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Uzupełnij wszystkie pola", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
