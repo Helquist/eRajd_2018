@@ -20,7 +20,7 @@ public class VolleyballResultsFragment extends Fragment {
     public View text;
     public View currentGame;
     public View rootView;
-
+    public ViewGroup vg;
 
 
     public VolleyballResultsFragment() {
@@ -41,8 +41,10 @@ public class VolleyballResultsFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_volleyball_results, container, false);
         currentGame = rootView.findViewById(R.id.currentGame);
+        vg = rootView.findViewById(R.id.tournament_bracket);
+        vg.addView(new DrawView(this.getActivity()));
 
-        container.addView(new DrawView(this.getActivity()));
+        //container.addView(new DrawView(this.getActivity()));
 
 
 
@@ -72,7 +74,7 @@ public class VolleyballResultsFragment extends Fragment {
             paint.setStrokeWidth(8);
             super.onDraw(canvas);
 
-            underlineView(rootView.findViewById(R.id.quarter_team1), canvas);
+            underlineView(vg.findViewById(R.id.quarter_team1), canvas);
             underlineView(rootView.findViewById(R.id.quarter_team2), canvas);
             underlineView(rootView.findViewById(R.id.semi_team1), canvas);
             connectView(rootView.findViewById(R.id.quarter_team1), rootView.findViewById(R.id.semi_team1), canvas);
@@ -83,9 +85,9 @@ public class VolleyballResultsFragment extends Fragment {
 
         public void underlineView(View view, Canvas canvas){
             int startX = view.getLeft();
-            int startY = view.getBottom() + currentGame.getHeight();
+            int startY = view.getBottom();
             int stopX = view.getRight();
-            int stopY = view.getBottom() + currentGame.getHeight();
+            int stopY = view.getBottom();
 
             canvas.drawLine(startX, startY, stopX, stopY, paint);
         }
@@ -93,15 +95,15 @@ public class VolleyballResultsFragment extends Fragment {
         public void connectView(View view1, View view2, Canvas canvas){
 
             int startX = view1.getRight();
-            int startY = view1.getBottom() + currentGame.getHeight();
+            int startY = view1.getBottom();
             int stopX = view2.getLeft();
-            int stopY = view1.getBottom() + currentGame.getHeight();
+            int stopY = view1.getBottom();
             canvas.drawLine(startX, startY, stopX, stopY, paint);
 
             startX = view2.getLeft();
-            startY = view1.getBottom() + currentGame.getHeight();
+            startY = view1.getBottom();
             stopX = view2.getLeft();
-            stopY = view2.getBottom() + currentGame.getHeight();
+            stopY = view2.getBottom();
             canvas.drawLine(startX, startY, stopX, stopY, paint);
 
 
