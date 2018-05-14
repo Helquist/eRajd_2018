@@ -33,26 +33,59 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/separator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/black" />
 
 
         </android.support.constraint.ConstraintLayout>
 
-        <ScrollView
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black" />
+
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/tournament_bracket"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/quarter_team1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Telegroszek"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/quarter_team2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Telegroszek2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quarter_team1"/>
 
 
-            </LinearLayout>
-        </ScrollView>
+                <TextView
+                    android:id="@+id/semi_team1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Telegroszek"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="0dp"
+                    app:layout_constraintStart_toEndOf="@id/quarter_team2"
+                    app:layout_constraintBottom_toBottomOf="@id/quarter_team2"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </HorizontalScrollView>
+
     </LinearLayout>
 </RelativeLayout>
