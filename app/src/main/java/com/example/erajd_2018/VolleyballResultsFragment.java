@@ -12,6 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 
 public class VolleyballResultsFragment extends Fragment {
@@ -21,6 +30,7 @@ public class VolleyballResultsFragment extends Fragment {
     public View currentGame;
     public View rootView;
     public ViewGroup tournamentBracketView;
+    private FirebaseDatabase database;
 
 
     public VolleyballResultsFragment() {
@@ -43,6 +53,30 @@ public class VolleyballResultsFragment extends Fragment {
         currentGame = rootView.findViewById(R.id.currentGame);
         tournamentBracketView = rootView.findViewById(R.id.tournament_bracket);
         tournamentBracketView.addView(new DrawView(this.getActivity()));
+
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("gamesVolleyball");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String cGame =  dataSnapshot.child("currentGame").getValue().toString();
+                TextView cTeam1 = rootView.findViewById(R.id.currentTeam1);
+                cTeam1.setText(dataSnapshot.child(cGame).child("team1").getValue().toString());
+                TextView cTeam2 = rootView.findViewById(R.id.currentTeam2);
+                cTeam2.setText(dataSnapshot.child(cGame).child("team2").getValue().toString());
+                TextView cTeam1Score = rootView.findViewById(R.id.score1);
+                cTeam1Score.setText(dataSnapshot.child(cGame).child("score1").getValue().toString());
+                TextView cTeam2Score = rootView.findViewById(R.id.score2);
+                cTeam2Score.setText(dataSnapshot.child(cGame).child("score2").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                //Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
         //container.addView(new DrawView(this.getActivity()));
 
@@ -147,7 +181,7 @@ public class VolleyballResultsFragment extends Fragment {
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-            int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+            int parentWidth = MeasureSpec.getSize(widthMeasureSpec)+1000;
             int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
             this.setMeasuredDimension(parentWidth, parentHeight);
         }
