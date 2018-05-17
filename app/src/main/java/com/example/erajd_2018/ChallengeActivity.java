@@ -13,9 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ChallengeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +29,10 @@ public class ChallengeActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private TextView mMailTextView;
     private NavigationView navigationView;
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
 
     @Override
@@ -46,7 +56,114 @@ public class ChallengeActivity extends AppCompatActivity
         View header = navigationView.getHeaderView(0);
         mMailTextView = (TextView) header.findViewById(R.id.mailTextView);
         mMailTextView.setText(mAuth.getCurrentUser().getEmail());
+
+
+        expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        prepareListData();
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        expListView.setAdapter(listAdapter);
+
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        listDataHeader.get(groupPosition)
+                                + " : "
+                                + listDataChild.get(
+                                listDataHeader.get(groupPosition)).get(
+                                childPosition), Toast.LENGTH_SHORT)
+                        .show();
+                return false;
+            }
+        });
+
     }
+
+
+
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        // Adding child data
+
+        listDataHeader.add("0");
+        listDataHeader.add("1");
+        listDataHeader.add("2");
+        listDataHeader.add("3");
+        listDataHeader.add("4");
+        listDataHeader.add("5");
+        listDataHeader.add("6");
+
+        // Adding child data
+        List<String> l0 = new ArrayList<String>();
+        l0.add("0");
+        l0.add("1");
+        l0.add("2");
+        l0.add("3");
+        l0.add("4");
+        l0.add("5");
+        l0.add("6");
+
+        List<String> l1 = new ArrayList<String>();
+        l1.add("0");
+        l1.add("1");
+        l1.add("2");
+        l1.add("3");
+        l1.add("4");
+        l1.add("5");
+
+        List<String> l2 = new ArrayList<String>();
+        l2.add("0");
+        l2.add("1");
+        l2.add("2");
+        l2.add("3");
+        l2.add("4");
+
+        List<String> l3 = new ArrayList<String>();
+        l3.add("0");
+        l3.add("1");
+        l3.add("2");
+        l3.add("3");
+        l3.add("4");
+        l3.add("5");
+        l3.add("6");
+
+        List<String> l4 = new ArrayList<String>();
+        l4.add("0");
+        l4.add("1");
+        l4.add("2");
+        l4.add("3");
+        l4.add("4");
+        l4.add("5");
+
+        List<String> l5 = new ArrayList<String>();
+        l5.add("0");
+        l5.add("1");
+        l5.add("2");
+        l5.add("3");
+        l5.add("4");
+
+        List<String> l6 = new ArrayList<String>();
+        l6.add("0");
+        l6.add("1");
+        l6.add("2");
+        l6.add("3");
+        l6.add("4");
+
+        listDataChild.put(listDataHeader.get(0), l0); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), l1);
+        listDataChild.put(listDataHeader.get(2), l2);
+        listDataChild.put(listDataHeader.get(3), l3);
+        listDataChild.put(listDataHeader.get(4), l4);
+        listDataChild.put(listDataHeader.get(5), l5);
+        listDataChild.put(listDataHeader.get(6), l6);
+
+    }
+
 
     @Override
     public void onResume() {

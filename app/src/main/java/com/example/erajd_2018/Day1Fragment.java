@@ -90,7 +90,6 @@ public class Day1Fragment extends Fragment {
     }
 
     private void populateList(DataSnapshot dataSnapshot) {
-        // TODO Auto-generated method stub
 
         list=new ArrayList<HashMap<String,String>>();
 
