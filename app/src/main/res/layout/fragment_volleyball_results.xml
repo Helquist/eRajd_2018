@@ -37,7 +37,6 @@
                 android:id="@+id/currentTeam1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Telegroszek1"
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/currentGameTxt"
@@ -47,7 +46,6 @@
                 android:id="@+id/currentTeam2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Telegroszek2"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/currentGameTxt"
@@ -67,7 +65,6 @@
                 android:id="@+id/score1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
                 app:layout_constraintEnd_toStartOf="@id/score_separator"
                 app:layout_constraintTop_toBottomOf="@id/currentGameTxt"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -76,7 +73,6 @@
                 android:id="@+id/score2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
                 app:layout_constraintStart_toEndOf="@id/score_separator"
                 app:layout_constraintTop_toBottomOf="@id/currentGameTxt"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -101,88 +97,80 @@
 
                 <TextView
                     android:id="@+id/quarter_team1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Telegroszek1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team1"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/quarter_team2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Telegroszek2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team1"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team1"/>
 
                 <TextView
                     android:id="@+id/quarter_team3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="32dp"
-                    android:text="Telegroszek3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team2"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team2"/>
 
                 <TextView
                     android:id="@+id/quarter_team4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Telegroszek4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team2"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team3"/>
 
                 <TextView
                     android:id="@+id/quarter_team5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="32dp"
-                    android:text="Telegroszek5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team3"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team4"/>
 
                 <TextView
                     android:id="@+id/quarter_team6"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Telegroszek6"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team3"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team5"/>
 
                 <TextView
                     android:id="@+id/quarter_team7"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="32dp"
-                    android:text="Telegroszek7"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team4"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team6"/>
 
                 <TextView
                     android:id="@+id/quarter_team8"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Telegroszek8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team4"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team7"/>
@@ -191,9 +179,8 @@
 
                 <TextView
                     android:id="@+id/semi_team1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Telegroszek1"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     app:layout_constraintStart_toEndOf="@id/quarter_team1"
@@ -202,9 +189,8 @@
 
                 <TextView
                     android:id="@+id/semi_team2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Telegroszek4"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     app:layout_constraintStart_toEndOf="@id/quarter_team3"
@@ -213,9 +199,8 @@
 
                 <TextView
                     android:id="@+id/semi_team3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Telegroszek5"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     app:layout_constraintStart_toEndOf="@id/quarter_team5"
@@ -224,9 +209,8 @@
 
                 <TextView
                     android:id="@+id/semi_team4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Telegroszek8"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     app:layout_constraintStart_toEndOf="@id/quarter_team7"
@@ -236,9 +220,8 @@
 
                 <TextView
                     android:id="@+id/final_team1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Telegroszek6"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     app:layout_constraintStart_toEndOf="@id/semi_team1"
@@ -247,9 +230,8 @@
 
                 <TextView
                     android:id="@+id/final_team2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Telegroszek8"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
                     app:layout_constraintStart_toEndOf="@id/semi_team2"
@@ -258,10 +240,9 @@
 
                 <TextView
                     android:id="@+id/winner_team"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="Telegroszek"
                     app:layout_constraintBottom_toBottomOf="@id/final_team2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/final_team2"

@@ -55,12 +55,20 @@ public class VolleyballResultsFragment extends Fragment {
         tournamentBracketView.addView(new DrawView(this.getActivity()));
 
         database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("gamesVolleyball");
+        final DatabaseReference myRef = database.getReference("gamesVolleyball");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String cGame =  dataSnapshot.child("currentGame").getValue().toString();
+                if(cGame.equals("none")){
+                    TextView tv = rootView.findViewById(R.id.currentGameTxt);
+                    tv.setText(R.string.no_current_game);
+                } else {
+                    TextView tv = rootView.findViewById(R.id.currentGameTxt);
+                    tv.setText(R.string.current_game);
+                }
+
                 TextView cTeam1 = rootView.findViewById(R.id.currentTeam1);
                 cTeam1.setText(dataSnapshot.child(cGame).child("team1").getValue().toString());
                 TextView cTeam2 = rootView.findViewById(R.id.currentTeam2);
@@ -69,6 +77,94 @@ public class VolleyballResultsFragment extends Fragment {
                 cTeam1Score.setText(dataSnapshot.child(cGame).child("score1").getValue().toString());
                 TextView cTeam2Score = rootView.findViewById(R.id.score2);
                 cTeam2Score.setText(dataSnapshot.child(cGame).child("score2").getValue().toString());
+
+
+                TextView qt1 = rootView.findViewById(R.id.quarter_team1);
+                qt1.setText(dataSnapshot.child("quarter1").child("team1").getValue().toString());
+                TextView qt2 = rootView.findViewById(R.id.quarter_team2);
+                qt2.setText(dataSnapshot.child("quarter1").child("team2").getValue().toString());
+                TextView qt3 = rootView.findViewById(R.id.quarter_team3);
+                qt3.setText(dataSnapshot.child("quarter2").child("team1").getValue().toString());
+                TextView qt4 = rootView.findViewById(R.id.quarter_team4);
+                qt4.setText(dataSnapshot.child("quarter2").child("team2").getValue().toString());
+                TextView qt5 = rootView.findViewById(R.id.quarter_team5);
+                qt5.setText(dataSnapshot.child("quarter3").child("team1").getValue().toString());
+                TextView qt6 = rootView.findViewById(R.id.quarter_team6);
+                qt6.setText(dataSnapshot.child("quarter3").child("team2").getValue().toString());
+                TextView qt7 = rootView.findViewById(R.id.quarter_team7);
+                qt7.setText(dataSnapshot.child("quarter4").child("team1").getValue().toString());
+                TextView qt8 = rootView.findViewById(R.id.quarter_team8);
+                qt8.setText(dataSnapshot.child("quarter4").child("team2").getValue().toString());
+
+                TextView st1 = rootView.findViewById(R.id.semi_team1);
+                st1.setText(dataSnapshot.child("semi1").child("team1").getValue().toString());
+                TextView st2 = rootView.findViewById(R.id.semi_team2);
+                st2.setText(dataSnapshot.child("semi1").child("team2").getValue().toString());
+                TextView st3 = rootView.findViewById(R.id.semi_team3);
+                st3.setText(dataSnapshot.child("semi2").child("team1").getValue().toString());
+                TextView st4 = rootView.findViewById(R.id.semi_team4);
+                st4.setText(dataSnapshot.child("semi2").child("team2").getValue().toString());
+
+                TextView ft1 = rootView.findViewById(R.id.final_team1);
+                ft1.setText(dataSnapshot.child("final").child("team1").getValue().toString());
+                TextView ft2 = rootView.findViewById(R.id.final_team2);
+                ft2.setText(dataSnapshot.child("final").child("team2").getValue().toString());
+
+                TextView wt = rootView.findViewById(R.id.winner_team);
+                if( dataSnapshot.child("final").child("end").getValue().toString().equals("1"))
+                    wt.setText(dataSnapshot.child("final").child("team1").getValue().toString());
+                else if(dataSnapshot.child("final").child("end").getValue().toString().equals("2"))
+                    wt.setText(dataSnapshot.child("final").child("team2").getValue().toString());
+                else
+                    wt.setText("");
+
+                String a = dataSnapshot.child("quarter1").child("end").getValue().toString();
+                if( a.equals("1"))
+                    myRef.child("semi1").child("team1").setValue(dataSnapshot.child("quarter1").child("team1").getValue().toString());
+                else if(a.equals("2"))
+                    myRef.child("semi1").child("team1").setValue(dataSnapshot.child("quarter1").child("team2").getValue().toString());
+                else
+                    myRef.child("semi1").child("team1").setValue("");
+                a = dataSnapshot.child("quarter2").child("end").getValue().toString();
+                if( a.equals("1"))
+                    myRef.child("semi1").child("team2").setValue(dataSnapshot.child("quarter2").child("team1").getValue().toString());
+                else if(a.equals("2"))
+                    myRef.child("semi1").child("team2").setValue(dataSnapshot.child("quarter2").child("team2").getValue().toString());
+                else
+                    myRef.child("semi1").child("team2").setValue("");
+                a = dataSnapshot.child("quarter3").child("end").getValue().toString();
+                if( a.equals("1"))
+                    myRef.child("semi2").child("team1").setValue(dataSnapshot.child("quarter3").child("team1").getValue().toString());
+                else if(a.equals("2"))
+                    myRef.child("semi2").child("team1").setValue(dataSnapshot.child("quarter3").child("team2").getValue().toString());
+                else
+                    myRef.child("semi2").child("team1").setValue("");
+                a = dataSnapshot.child("quarter4").child("end").getValue().toString();
+                if( a.equals("1"))
+                    myRef.child("semi2").child("team2").setValue(dataSnapshot.child("quarter4").child("team1").getValue().toString());
+                else if(a.equals("2"))
+                    myRef.child("semi2").child("team2").setValue(dataSnapshot.child("quarter4").child("team2").getValue().toString());
+                else
+                    myRef.child("semi2").child("team2").setValue("");
+
+                a = dataSnapshot.child("semi1").child("end").getValue().toString();
+                if( a.equals("1"))
+                    myRef.child("final").child("team1").setValue(dataSnapshot.child("semi1").child("team1").getValue().toString());
+                else if(a.equals("2"))
+                    myRef.child("final").child("team1").setValue(dataSnapshot.child("semi1").child("team2").getValue().toString());
+                else
+                    myRef.child("final").child("team1").setValue("");
+                a = dataSnapshot.child("semi2").child("end").getValue().toString();
+                if( a.equals("1"))
+                    myRef.child("final").child("team2").setValue(dataSnapshot.child("semi2").child("team1").getValue().toString());
+                else if(a.equals("2"))
+                    myRef.child("final").child("team2").setValue(dataSnapshot.child("semi2").child("team2").getValue().toString());
+                else
+                    myRef.child("final").child("team2").setValue("");
+
+
+
+
             }
 
             @Override
@@ -78,7 +174,6 @@ public class VolleyballResultsFragment extends Fragment {
             }
         });
 
-        //container.addView(new DrawView(this.getActivity()));
 
 
 

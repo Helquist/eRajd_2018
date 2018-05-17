@@ -94,6 +94,7 @@
     <string name="person6">Szósty członek</string>
     <string name="submmit_team">Zgłoś drużynę</string>
     <string name="current_game">Trwający mecz</string>
+    <string name="no_current_game">Nie trwa obecnie żaden mecz</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
