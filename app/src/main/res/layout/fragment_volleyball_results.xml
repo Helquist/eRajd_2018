@@ -18,7 +18,9 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/currentGame"
             android:layout_width="match_parent"
-            android:layout_height="78dp">
+            android:layout_height="78dp"
+
+            >
 
             <TextView
                 android:id="@+id/currentGameTxt"
@@ -38,6 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:textSize="15sp"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/currentGameTxt"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -47,6 +51,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:textSize="15sp"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/currentGameTxt"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -56,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/currentGameTxt"
@@ -65,6 +72,10 @@
                 android:id="@+id/score1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:layout_marginEnd="5dp"
+                android:textSize="45sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/score_separator"
                 app:layout_constraintTop_toBottomOf="@id/currentGameTxt"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -73,6 +84,10 @@
                 android:id="@+id/score2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:layout_marginStart="5dp"
+                android:textSize="45sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/score_separator"
                 app:layout_constraintTop_toBottomOf="@id/currentGameTxt"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -101,6 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team1"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -111,6 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team1"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team1"/>
@@ -121,6 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="32dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team2"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team2"/>
@@ -131,6 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team2"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team3"/>
@@ -141,6 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="32dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team3"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team4"/>
@@ -151,6 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team3"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team5"/>
@@ -161,6 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="32dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team4"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team6"/>
@@ -171,6 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/semi_team4"
                     app:layout_constraintTop_toBottomOf="@id/quarter_team7"/>
@@ -183,6 +206,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@id/quarter_team1"
                     app:layout_constraintEnd_toStartOf="@id/final_team1"
                     app:layout_constraintBottom_toBottomOf="@id/quarter_team2"/>
@@ -193,6 +217,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@id/quarter_team3"
                     app:layout_constraintEnd_toStartOf="@id/final_team1"
                     app:layout_constraintBottom_toBottomOf="@id/quarter_team4"/>
@@ -203,6 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@id/quarter_team5"
                     app:layout_constraintEnd_toStartOf="@id/final_team2"
                     app:layout_constraintBottom_toBottomOf="@id/quarter_team5"/>
@@ -213,6 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@id/quarter_team7"
                     app:layout_constraintEnd_toStartOf="@id/final_team2"
                     app:layout_constraintBottom_toBottomOf="@id/quarter_team7"/>
@@ -224,6 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@id/semi_team1"
                     app:layout_constraintEnd_toStartOf="@id/winner_team"
                     app:layout_constraintBottom_toBottomOf="@id/semi_team2"/>
@@ -234,6 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="0dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@id/semi_team2"
                     app:layout_constraintEnd_toStartOf="@id/winner_team"
                     app:layout_constraintBottom_toBottomOf="@id/semi_team3"/>
@@ -243,6 +272,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@id/final_team2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/final_team2"
