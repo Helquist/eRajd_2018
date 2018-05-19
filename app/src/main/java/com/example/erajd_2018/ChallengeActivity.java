@@ -101,58 +101,31 @@ public class ChallengeActivity extends AppCompatActivity
         // Adding child data
         List<String> l0 = new ArrayList<String>();
         l0.add("0");
-        l0.add("1");
-        l0.add("2");
-        l0.add("3");
-        l0.add("4");
-        l0.add("5");
-        l0.add("6");
+
 
         List<String> l1 = new ArrayList<String>();
         l1.add("0");
-        l1.add("1");
-        l1.add("2");
-        l1.add("3");
-        l1.add("4");
-        l1.add("5");
+
 
         List<String> l2 = new ArrayList<String>();
         l2.add("0");
-        l2.add("1");
-        l2.add("2");
-        l2.add("3");
-        l2.add("4");
+
 
         List<String> l3 = new ArrayList<String>();
         l3.add("0");
-        l3.add("1");
-        l3.add("2");
-        l3.add("3");
-        l3.add("4");
-        l3.add("5");
-        l3.add("6");
+
 
         List<String> l4 = new ArrayList<String>();
         l4.add("0");
-        l4.add("1");
-        l4.add("2");
-        l4.add("3");
-        l4.add("4");
-        l4.add("5");
+
 
         List<String> l5 = new ArrayList<String>();
         l5.add("0");
-        l5.add("1");
-        l5.add("2");
-        l5.add("3");
-        l5.add("4");
+
 
         List<String> l6 = new ArrayList<String>();
         l6.add("0");
-        l6.add("1");
-        l6.add("2");
-        l6.add("3");
-        l6.add("4");
+
 
         listDataChild.put(listDataHeader.get(0), l0); // Header, Child data
         listDataChild.put(listDataHeader.get(1), l1);

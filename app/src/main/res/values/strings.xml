@@ -95,6 +95,8 @@
     <string name="submmit_team">Zgłoś drużynę</string>
     <string name="current_game">Trwający mecz</string>
     <string name="no_current_game">Nie trwa obecnie żaden mecz</string>
+    <string name="select_picture">Wybierz zdjęcie</string>
+    <string name="submit">Wyślij</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
