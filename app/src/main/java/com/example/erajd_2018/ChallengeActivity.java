@@ -1,9 +1,18 @@
 package com.example.erajd_2018;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,14 +23,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnPausedListener;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.example.erajd_2018.EmailPasswordActivity.CHANNEL_ID;
+import static com.example.erajd_2018.TestActivity.PICK_IMAGE;
 
 public class ChallengeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,10 +55,12 @@ public class ChallengeActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private TextView mMailTextView;
     private NavigationView navigationView;
+    private FirebaseDatabase database;
+    private StorageReference mStorageRef;
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    HashMap<String, String> listDataChild;
 
 
     @Override
@@ -43,6 +71,9 @@ public class ChallengeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        DatabaseReference myRef = database.getReference("czelendże");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -59,83 +90,31 @@ public class ChallengeActivity extends AppCompatActivity
 
 
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
-        prepareListData();
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-        expListView.setAdapter(listAdapter);
 
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listDataHeader = new ArrayList<String>();
+                listDataChild = new HashMap<String, String>();
+                for(DataSnapshot child : dataSnapshot.getChildren() ){
+                    listDataHeader.add(child.getKey());
+                    listDataChild.put(child.getKey(), child.getValue().toString());
+                    listAdapter = new ExpandableListAdapter(getApplicationContext(), listDataHeader, listDataChild, ChallengeActivity.this);
+                    expListView.setAdapter(listAdapter);
+                }
+            }
 
             @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                Toast.makeText(
-                        getApplicationContext(),
-                        listDataHeader.get(groupPosition)
-                                + " : "
-                                + listDataChild.get(
-                                listDataHeader.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT)
-                        .show();
-                return false;
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                //Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
     }
 
-
-
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
-        // Adding child data
-
-        listDataHeader.add("0");
-        listDataHeader.add("1");
-        listDataHeader.add("2");
-        listDataHeader.add("3");
-        listDataHeader.add("4");
-        listDataHeader.add("5");
-        listDataHeader.add("6");
-
-        // Adding child data
-        List<String> l0 = new ArrayList<String>();
-        l0.add("0");
-
-
-        List<String> l1 = new ArrayList<String>();
-        l1.add("0");
-
-
-        List<String> l2 = new ArrayList<String>();
-        l2.add("0");
-
-
-        List<String> l3 = new ArrayList<String>();
-        l3.add("0");
-
-
-        List<String> l4 = new ArrayList<String>();
-        l4.add("0");
-
-
-        List<String> l5 = new ArrayList<String>();
-        l5.add("0");
-
-
-        List<String> l6 = new ArrayList<String>();
-        l6.add("0");
-
-
-        listDataChild.put(listDataHeader.get(0), l0); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), l1);
-        listDataChild.put(listDataHeader.get(2), l2);
-        listDataChild.put(listDataHeader.get(3), l3);
-        listDataChild.put(listDataHeader.get(4), l4);
-        listDataChild.put(listDataHeader.get(5), l5);
-        listDataChild.put(listDataHeader.get(6), l6);
-
-    }
 
 
     @Override
@@ -147,6 +126,101 @@ public class ChallengeActivity extends AppCompatActivity
         navigationView.getMenu().getItem(1).setChecked(true);
         super.onResume();
     }
+
+
+    public void selectPicture(){
+//        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//        getIntent.setType("image/* video/*");
+//
+//        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        pickIntent.setType("image/* video/*");
+//
+//        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+//        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+//
+//        startActivityForResult(chooserIntent, PICK_IMAGE);
+
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"image/*", "video/*"});
+        startActivityForResult(intent, PICK_IMAGE);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Cursor returnCursor = getContentResolver().query(selectedImage, null, null, null, null);
+            int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            returnCursor.moveToFirst();
+            String fileName = returnCursor.getString(nameIndex);
+
+            final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID);
+            mBuilder.setContentTitle("Upload")
+                    .setContentText("Upload in progress")
+                    .setSmallIcon(R.drawable.ic_erajd_logo_simple)
+                    .setPriority(NotificationCompat.PRIORITY_LOW);
+
+// Issue the initial notification with zero progress
+            final int PROGRESS_MAX = 100;
+            //int PROGRESS_CURRENT = 0;
+            mBuilder.setProgress(PROGRESS_MAX, 0, false);
+            notificationManager.notify(1, mBuilder.build());
+
+
+
+            StorageReference storageRef = mStorageRef.child(mAuth.getCurrentUser().getEmail() + "/" + fileName);
+            storageRef.putFile(selectedImage)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getApplicationContext(), "udało się", Toast.LENGTH_SHORT).show();
+                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Toast.makeText(getApplicationContext(), "nie udało się", Toast.LENGTH_SHORT).show();
+                            // Handle unsuccessful uploads
+                            // ...
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            int currentProgress = (int) progress;
+                            mBuilder.setProgress(PROGRESS_MAX, currentProgress, false);
+                            notificationManager.notify(1, mBuilder.build());
+
+                            if(currentProgress==100){
+                                mBuilder.setContentText("Upload complete")
+                                        .setProgress(0,0,false);
+                                notificationManager.notify(1, mBuilder.build());
+                            }
+
+                        }
+                    }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
+                        System.out.println("Upload is paused");
+                    }
+                    });
+        }
+    }
+
+
+
+
+
 
     @Override
     public void onBackPressed() {

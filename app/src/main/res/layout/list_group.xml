@@ -5,11 +5,22 @@
     android:orientation="vertical"
     android:padding="8dp">
 
+
+
     <TextView
-        android:id="@+id/lblListHeader"
+        android:id="@+id/challenge_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:gravity="center_vertical"
         android:textSize="17sp" />
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="20pkt"
+        android:gravity="end"
+        android:textSize="17sp" />
+
 
 </LinearLayout>
