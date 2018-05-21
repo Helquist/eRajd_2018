@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.erajd_2018">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+
 
     <application
         android:allowBackup="true"
@@ -13,9 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_erajd_color_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_android_map_api_key" />
+
         <activity android:name=".EmailPasswordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +57,8 @@
         <activity
             android:name=".LocationActivity"
             android:label="@string/title_activity_location"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".InfoActivity"/>
     </application>
 
 </manifest>

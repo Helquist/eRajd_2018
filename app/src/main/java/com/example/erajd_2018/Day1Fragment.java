@@ -1,7 +1,12 @@
 package com.example.erajd_2018;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
@@ -23,8 +28,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
+import static android.content.Context.ALARM_SERVICE;
 import static android.support.constraint.Constraints.TAG;
 
 
@@ -40,6 +47,7 @@ public class Day1Fragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference myRefDay1;
 
+
     public Day1Fragment() {
         // Required empty public constructor
     }
@@ -51,6 +59,8 @@ public class Day1Fragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_day, container, false);
         database = FirebaseDatabase.getInstance();
         myRefDay1 = database.getReference("plan_d1");
+
+
 
 
         final ListView listView=(ListView)rootView.findViewById(R.id.listViewDay1);
@@ -108,5 +118,8 @@ public class Day1Fragment extends Fragment {
             list.add(hashmap);
         }
     }
+
+
+
 
 }

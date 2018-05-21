@@ -132,11 +132,14 @@ public class FootballActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.app_info) {
+            Intent intent = new Intent(this, InfoActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
         } else if (id == R.id.action_signOut) {
             mAuth.signOut();
-            Intent intent = new Intent(this, EmailPasswordActivity.class);;
+            Intent intent = new Intent(this, EmailPasswordActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         }
 
