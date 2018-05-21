@@ -2,6 +2,7 @@ package com.example.erajd_2018;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,6 +23,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -57,6 +61,8 @@ public class ChallengeActivity extends AppCompatActivity
     private NavigationView navigationView;
     private FirebaseDatabase database;
     private StorageReference mStorageRef;
+    private int lastPosition = -1;
+    private Uri picture;
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -90,8 +96,17 @@ public class ChallengeActivity extends AppCompatActivity
 
 
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
-
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if (lastPosition != -1
+                        && groupPosition != lastPosition) {
+                    expListView.collapseGroup(lastPosition);
+                }
+                lastPosition = groupPosition;
+            }
+        });
 
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -158,28 +173,39 @@ public class ChallengeActivity extends AppCompatActivity
             int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             returnCursor.moveToFirst();
             String fileName = returnCursor.getString(nameIndex);
+            picture = selectedImage;
 
+
+
+        }
+    }
+
+    public void uploadPicture(String teamName){
+        if(lastPosition!=-1){
             final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
             final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID);
-            mBuilder.setContentTitle("Upload")
-                    .setContentText("Upload in progress")
+            mBuilder.setContentTitle("Wysyłanie")
+                    .setContentText("Trwa wysyłanie pliku")
                     .setSmallIcon(R.drawable.ic_erajd_logo_simple)
                     .setPriority(NotificationCompat.PRIORITY_LOW);
 
-// Issue the initial notification with zero progress
+            StorageMetadata metadata = new StorageMetadata.Builder()
+                    .setCustomMetadata("eMail", mAuth.getCurrentUser().getEmail())
+                    .build();
+
+            // Issue the initial notification with zero progress
             final int PROGRESS_MAX = 100;
-            //int PROGRESS_CURRENT = 0;
             mBuilder.setProgress(PROGRESS_MAX, 0, false);
             notificationManager.notify(1, mBuilder.build());
 
+            StorageReference storageRef = mStorageRef.child(teamName + "/" + listDataHeader.get(lastPosition));
 
 
-            StorageReference storageRef = mStorageRef.child(mAuth.getCurrentUser().getEmail() + "/" + fileName);
-            storageRef.putFile(selectedImage)
+            storageRef.putFile(picture, metadata)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(getApplicationContext(), "udało się", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Wysłano plik", Toast.LENGTH_SHORT).show();
                             Uri downloadUrl = taskSnapshot.getDownloadUrl();
                         }
                     })
@@ -201,23 +227,25 @@ public class ChallengeActivity extends AppCompatActivity
                             mBuilder.setProgress(PROGRESS_MAX, currentProgress, false);
                             notificationManager.notify(1, mBuilder.build());
 
-                            if(currentProgress==100){
-                                mBuilder.setContentText("Upload complete")
+                            if(currentProgress==PROGRESS_MAX){
+                                mBuilder.setContentText("Zakończono wysyłanie pliku")
                                         .setProgress(0,0,false);
                                 notificationManager.notify(1, mBuilder.build());
                             }
 
                         }
                     }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
-                        System.out.println("Upload is paused");
-                    }
-                    });
+                @Override
+                public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
+                    System.out.println("Upload is paused");
+                }
+            });
+            expListView.collapseGroup(lastPosition);
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+
     }
-
-
 
 
 

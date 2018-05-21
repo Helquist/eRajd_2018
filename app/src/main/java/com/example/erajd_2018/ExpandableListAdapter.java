@@ -7,11 +7,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this.activity = activity;
     }
 
+
+
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
         return this._listDataChild.get(this._listDataHeader.get(groupPosition));
@@ -45,7 +49,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(final int groupPosition, final int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+                             boolean isLastChild, View convertView, final ViewGroup parent) {
 
         final String childText = (String) getChild(groupPosition, childPosition);
 
@@ -55,23 +59,34 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_item, null);
         }
 
+        final Button submit_button = convertView.findViewById(R.id.submit_photo);
+
+
         final Button select_button = convertView.findViewById(R.id.select_photo);
         select_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 activity.selectPicture();
+                submit_button.setEnabled(true);
 
             }
         });
 
 
-        final Button submit_button = convertView.findViewById(R.id.submit_photo);
-        submit_button.setEnabled(false);
+
         submit_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
+                EditText teamTextField = parent.findViewById(R.id.team);
+                String team = teamTextField.getText().toString();
+                if (TextUtils.isEmpty(team)) {
+                    teamTextField.setError("Required.");
+                } else {
+                    teamTextField.setError(null);
+                    activity.uploadPicture(team);
+                }
 
-                Toast.makeText(_context, _listDataHeader.get(groupPosition)+"submit", Toast.LENGTH_SHORT).show();
+
             }
         });
         //TODO Zawartość!!!!!
