@@ -177,10 +177,7 @@ public class LocationActivity extends AppCompatActivity
     public void onMapReady(GoogleMap map) {
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(49.3687773, 20.884274900000037))
-                .title("DW Kolejarz"));
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(49.36463184,20.88695043))
-                .title("Sklep spożywczy Groszek"));
+                .title("Marker"));
     }
 
 
