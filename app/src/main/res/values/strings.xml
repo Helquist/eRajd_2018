@@ -100,6 +100,7 @@
     <string name="channel_name">nazwa kanału</string>
     <string name="channel_description">opis kanału</string>
     <string name="app_info">O aplikacji</string>
+    <string name="app_info_1">Aplikacja zrobiona przez Jacek Piskorz i Piotr Ćwięka w ramach projektu z przedmiotu Języki Programowania Wysokiego Poziomu prowadzonego przez dr. inż. Anrzeja Głowacza</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
